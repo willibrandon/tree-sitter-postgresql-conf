@@ -1,0 +1,215 @@
+==================
+Local and host rules
+==================
+local   all             all                                     trust
+host    all             all             127.0.0.1/32            scram-sha-256
+host    all             all             ::1/128                 md5
+hostssl replication     all             10.0.0.0/8              cert
+---
+
+(source_file
+  (hba_rule
+    (connection_type)
+    (database
+      (name))
+    (user
+      (name))
+    (auth_method))
+  (hba_rule
+    (connection_type)
+    (database
+      (name))
+    (user
+      (name))
+    (address
+      (ip_address))
+    (auth_method))
+  (hba_rule
+    (connection_type)
+    (database
+      (name))
+    (user
+      (name))
+    (address
+      (ip_address))
+    (auth_method))
+  (hba_rule
+    (connection_type)
+    (database
+      (name))
+    (user
+      (name))
+    (address
+      (ip_address))
+    (auth_method)))
+
+==================
+A netmask after the address
+==================
+host all all 10.0.0.0 255.0.0.0 md5
+---
+
+(source_file
+  (hba_rule
+    (connection_type)
+    (database
+      (name))
+    (user
+      (name))
+    (address
+      (ip_address))
+    (netmask)
+    (auth_method)))
+
+==================
+Host names and the address keywords
+==================
+host all all .example.com ldap
+host all all db.example.com trust
+host all all samehost trust
+host all all all reject
+---
+
+(source_file
+  (hba_rule
+    (connection_type)
+    (database
+      (name))
+    (user
+      (name))
+    (address
+      (hostname))
+    (auth_method))
+  (hba_rule
+    (connection_type)
+    (database
+      (name))
+    (user
+      (name))
+    (address
+      (hostname))
+    (auth_method))
+  (hba_rule
+    (connection_type)
+    (database
+      (name))
+    (user
+      (name))
+    (address
+      (hostname))
+    (auth_method))
+  (hba_rule
+    (connection_type)
+    (database
+      (name))
+    (user
+      (name))
+    (address
+      (hostname))
+    (auth_method)))
+
+==================
+Databases and users can be lists, groups, files, patterns and quoted
+==================
+local db1,db2 +admins,@users.txt trust
+local "my db" /^user_.*$ peer
+local sameuser,samerole,replication all trust
+---
+
+(source_file
+  (hba_rule
+    (connection_type)
+    (database
+      (name)
+      (name))
+    (user
+      (role_group
+        (name))
+      (file_reference
+        (path)))
+    (auth_method))
+  (hba_rule
+    (connection_type)
+    (database
+      (quoted_name))
+    (user
+      (regex))
+    (auth_method))
+  (hba_rule
+    (connection_type)
+    (database
+      (name)
+      (name)
+      (name))
+    (user
+      (name))
+    (auth_method)))
+
+==================
+Options after the method
+==================
+hostssl all all 0.0.0.0/0 cert clientcert=verify-full map=ssl
+host all all 192.168.0.0/16 ldap ldapserver=ldap.example.net ldapprefix="cn=" ldapsuffix=", dc=example, dc=net"
+local all all peer map=local
+---
+
+(source_file
+  (hba_rule
+    (connection_type)
+    (database
+      (name))
+    (user
+      (name))
+    (address
+      (ip_address))
+    (auth_method)
+    (auth_option
+      (option_name)
+      (option_value))
+    (auth_option
+      (option_name)
+      (option_value)))
+  (hba_rule
+    (connection_type)
+    (database
+      (name))
+    (user
+      (name))
+    (address
+      (ip_address))
+    (auth_method)
+    (auth_option
+      (option_name)
+      (option_value))
+    (auth_option
+      (option_name)
+      (quoted_name))
+    (auth_option
+      (option_name)
+      (quoted_name)))
+  (hba_rule
+    (connection_type)
+    (database
+      (name))
+    (user
+      (name))
+    (auth_method)
+    (auth_option
+      (option_name)
+      (option_value))))
+
+==================
+A comment after a rule
+==================
+local all all trust   # everyone on the socket
+---
+
+(source_file
+  (hba_rule
+    (connection_type)
+    (database
+      (name))
+    (user
+      (name))
+    (auth_method))
+  (comment))

@@ -1,0 +1,44 @@
+{
+  "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/config.schema.json",
+  "grammars": [
+    {
+      "name": "postgresql_conf",
+      "camelcase": "PostgresqlConf",
+      "title": "PostgreSQL Config",
+      "scope": "source.postgresql-conf",
+      "file-types": [
+        "postgresql.conf",
+        "postgresql.auto.conf",
+        "pg_hba.conf",
+        "pg_ident.conf"
+      ],
+      "injection-regex": "^(postgresql[-_]conf|pg[-_]hba|pg[-_]ident)$",
+      "class-name": "TreeSitterPostgresqlConf",
+      "highlights": [
+        "queries/highlights.scm"
+      ]
+    }
+  ],
+  "metadata": {
+    "version": "0.1.0",
+    "license": "MIT",
+    "description": "PostgreSQL configuration files for tree-sitter: postgresql.conf, pg_hba.conf and pg_ident.conf",
+    "authors": [
+      {
+        "name": "Brandon Williams"
+      }
+    ],
+    "links": {
+      "repository": "https://github.com/willibrandon/tree-sitter-postgresql-conf"
+    }
+  },
+  "bindings": {
+    "c": true,
+    "go": false,
+    "node": true,
+    "python": false,
+    "rust": true,
+    "swift": false,
+    "zig": false
+  }
+}

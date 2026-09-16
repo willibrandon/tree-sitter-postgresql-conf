@@ -1,0 +1,28 @@
+==================
+Includes in postgresql.conf
+==================
+include 'extra.conf'
+include_if_exists = 'optional.conf'
+include_dir 'conf.d'
+---
+
+(source_file
+  (include
+    (string))
+  (include
+    (string))
+  (include
+    (string)))
+
+==================
+Includes in pg_hba.conf take a bare path
+==================
+include /etc/postgresql/hba.d/local.conf
+include_dir hba.d
+---
+
+(source_file
+  (include
+    (path))
+  (include
+    (path)))

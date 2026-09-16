@@ -1,0 +1,38 @@
+==================
+User name maps
+==================
+omicron  bryanh     bryanh
+omicron  ann        ann
+omicron  robert     bob
+---
+
+(source_file
+  (user_mapping
+    (map_name)
+    (system_user)
+    (database_user))
+  (user_mapping
+    (map_name)
+    (system_user)
+    (database_user))
+  (user_mapping
+    (map_name)
+    (system_user)
+    (database_user)))
+
+==================
+A regular expression with a back reference and quoted names
+==================
+mymap   /^(.*)@example\.com$   \1
+mymap   "domain user"          "db user"
+---
+
+(source_file
+  (user_mapping
+    (map_name)
+    (regex)
+    (backreference))
+  (user_mapping
+    (map_name)
+    (quoted_name)
+    (quoted_name)))

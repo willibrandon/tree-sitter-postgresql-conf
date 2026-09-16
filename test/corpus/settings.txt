@@ -1,0 +1,118 @@
+==================
+A setting with each kind of value
+==================
+listen_addresses = '*'
+max_connections = 100
+shared_buffers = 128MB
+autovacuum_vacuum_scale_factor = 0.2
+fsync = on
+log_destination = stderr
+work_mem = -1
+---
+
+(source_file
+  (setting
+    (setting_name)
+    (string))
+  (setting
+    (setting_name)
+    (number))
+  (setting
+    (setting_name)
+    (number
+      (unit)))
+  (setting
+    (setting_name)
+    (number))
+  (setting
+    (setting_name)
+    (boolean))
+  (setting
+    (setting_name)
+    (bare_value))
+  (setting
+    (setting_name)
+    (number)))
+
+==================
+The equals sign is optional
+==================
+port 5432
+log_timezone 'Etc/UTC'
+---
+
+(source_file
+  (setting
+    (setting_name)
+    (number))
+  (setting
+    (setting_name)
+    (string)))
+
+==================
+Booleans in any case and only when whole
+==================
+fsync = ON
+autovacuum = False
+ssl = yes
+log_destination = offline
+---
+
+(source_file
+  (setting
+    (setting_name)
+    (boolean))
+  (setting
+    (setting_name)
+    (boolean))
+  (setting
+    (setting_name)
+    (boolean))
+  (setting
+    (setting_name)
+    (bare_value)))
+
+==================
+Comments, blank lines and a last line without a newline
+==================
+# PostgreSQL configuration file
+
+port = 5432    # (change requires restart)
+        # indented comment
+shared_buffers = 128MB
+---
+
+(source_file
+  (comment)
+  (setting
+    (setting_name)
+    (number))
+  (comment)
+  (comment)
+  (setting
+    (setting_name)
+    (number
+      (unit))))
+
+==================
+Custom settings have a dotted name
+==================
+myapp.timeout = 30s
+---
+
+(source_file
+  (setting
+    (setting_name)
+    (number
+      (unit))))
+
+==================
+Quotes double inside a string
+==================
+search_path = '"$user", ''public'''
+---
+
+(source_file
+  (setting
+    (setting_name)
+    (string)))

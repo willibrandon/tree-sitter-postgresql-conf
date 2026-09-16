@@ -1,0 +1,21 @@
+==================
+A setting without a value
+==================
+port =
+---
+
+(source_file
+  (ERROR))
+
+==================
+A host rule without an address or method
+==================
+host all all
+---
+
+(source_file
+  (ERROR
+    (connection_type)
+    (database
+      (name))
+    (name)))
