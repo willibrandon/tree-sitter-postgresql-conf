@@ -36,3 +36,25 @@ mymap   "domain user"          "db user"
     (map_name)
     (quoted_name)
     (quoted_name)))
+
+==================
+A single quote is an ordinary character
+==================
+mymap   'alice'    bob
+mymap   alice      'bob'
+mymap   o'brien    o'brien
+---
+
+(source_file
+  (user_mapping
+    (map_name)
+    (system_user)
+    (database_user))
+  (user_mapping
+    (map_name)
+    (system_user)
+    (database_user))
+  (user_mapping
+    (map_name)
+    (system_user)
+    (database_user)))

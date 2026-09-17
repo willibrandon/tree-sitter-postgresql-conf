@@ -13,8 +13,11 @@
 //
 // A word is any bare field: a setting name, a bare value, a role, a host
 // name, a method. It cannot start with a digit, which keeps numbers on their
-// own token, nor with a character that opens another token.
-const WORD = /[A-Za-z_.$][^\s=#'",]*/;
+// own token, nor with a character that opens another token. A single quote
+// inside it is just a character: only a double quote quotes a token in
+// pg_hba.conf and pg_ident.conf, so `it's` is a role, while in
+// postgresql.conf a bare value never holds one.
+const WORD = /[A-Za-z_.$][^\s=#",]*/;
 
 /**
  * @param {string} separator
@@ -96,8 +99,12 @@ export default grammar({
 
     user: $ => list(",", $._hba_name),
 
+    // A name that starts with a single quote is a name, quote and all, since
+    // the server's tokenizer knows only double quotes; `'db'` is a database
+    // called 'db'.
     _hba_name: $ => choice(
       alias($._word, $.name),
+      alias(token(/'[^\s=#",]*/), $.name),
       $.role_group,
       $.file_reference,
       $.regex,
@@ -129,10 +136,13 @@ export default grammar({
 
     // pg_ident.conf
 
+    // A mapping shares its first two fields' shape with a setting and its
+    // string value, so a user name in single quotes reaches the parser as a
+    // string token; it is a user name, quotes and all, and is named as one.
     user_mapping: $ => seq(
       field("map", alias($._word, $.map_name)),
-      field("system_user", choice(alias($._word, $.system_user), $.regex, $.quoted_name)),
-      field("database_user", choice(alias($._word, $.database_user), $.quoted_name, $.backreference)),
+      field("system_user", choice(alias($._word, $.system_user), alias($.string, $.system_user), $.regex, $.quoted_name)),
+      field("database_user", choice(alias($._word, $.database_user), alias($.string, $.database_user), $.quoted_name, $.backreference)),
     ),
 
     backreference: _ => /\\\d+/,

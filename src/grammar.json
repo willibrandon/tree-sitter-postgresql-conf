@@ -75,7 +75,7 @@
     },
     "_word": {
       "type": "PATTERN",
-      "value": "[A-Za-z_.$][^\\s=#'\",]*"
+      "value": "[A-Za-z_.$][^\\s=#\",]*"
     },
     "setting": {
       "type": "SEQ",
@@ -472,6 +472,18 @@
           "value": "name"
         },
         {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PATTERN",
+              "value": "'[^\\s=#\",]*"
+            }
+          },
+          "named": true,
+          "value": "name"
+        },
+        {
           "type": "SYMBOL",
           "name": "role_group"
         },
@@ -654,6 +666,15 @@
                 "value": "system_user"
               },
               {
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "string"
+                },
+                "named": true,
+                "value": "system_user"
+              },
+              {
                 "type": "SYMBOL",
                 "name": "regex"
               },
@@ -675,6 +696,15 @@
                 "content": {
                   "type": "SYMBOL",
                   "name": "_word"
+                },
+                "named": true,
+                "value": "database_user"
+              },
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "string"
                 },
                 "named": true,
                 "value": "database_user"

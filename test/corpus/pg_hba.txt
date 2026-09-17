@@ -44,6 +44,34 @@ hostssl replication     all             10.0.0.0/8              cert
     (auth_method)))
 
 ==================
+A single quote is an ordinary character
+==================
+host 'db' it's 10.0.0.0/8 md5
+local all all peer map=it's
+---
+
+(source_file
+  (hba_rule
+    (connection_type)
+    (database
+      (name))
+    (user
+      (name))
+    (address
+      (ip_address))
+    (auth_method))
+  (hba_rule
+    (connection_type)
+    (database
+      (name))
+    (user
+      (name))
+    (auth_method)
+    (auth_option
+      (option_name)
+      (option_value))))
+
+==================
 A netmask after the address
 ==================
 host all all 10.0.0.0 255.0.0.0 md5
