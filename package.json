@@ -1,6 +1,6 @@
 {
   "name": "tree-sitter-postgresql-conf",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "PostgreSQL configuration files for tree-sitter: postgresql.conf, pg_hba.conf and pg_ident.conf",
   "type": "module",
   "repository": {

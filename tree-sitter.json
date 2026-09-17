@@ -20,7 +20,7 @@
     }
   ],
   "metadata": {
-    "version": "0.1.0",
+    "version": "0.1.1",
     "license": "MIT",
     "description": "PostgreSQL configuration files for tree-sitter: postgresql.conf, pg_hba.conf and pg_ident.conf",
     "authors": [

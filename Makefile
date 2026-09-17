@@ -1,6 +1,6 @@
 LANGUAGE_NAME := tree-sitter-postgresql-conf
 HOMEPAGE_URL := https://github.com/willibrandon/tree-sitter-postgresql-conf
-VERSION := 0.1.0
+VERSION := 0.1.1
 DESCRIPTION := PostgreSQL configuration files for tree-sitter: postgresql.conf, pg_hba.conf and pg_ident.conf
 
 # repository
